@@ -620,8 +620,11 @@
                     <connections>
                         <outlet property="emptyCartStackView" destination="uSL-Dr-QA9" id="NTx-WP-5BM"/>
                         <outlet property="tableView" destination="aPl-gJ-b8R" id="0xc-hc-zPJ"/>
+                        <outlet property="titleLabel" destination="Pi7-cO-ES9" id="svS-NS-jsB"/>
                         <outlet property="totalPriceLabel" destination="qKd-8P-uIr" id="y2n-t8-pgd"/>
-                        <outlet property="totalPriceView" destination="pH7-q3-mHC" id="kLx-Ub-rsI"/>
+                        <outletCollection property="bottomViews" destination="pi0-cE-sJK" collectionClass="NSMutableArray" id="Uoj-Va-UCN"/>
+                        <outletCollection property="bottomViews" destination="Hjf-Jc-mWQ" collectionClass="NSMutableArray" id="smw-qz-n7d"/>
+                        <outletCollection property="bottomViews" destination="qKd-8P-uIr" collectionClass="NSMutableArray" id="bUq-cW-R3E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mea-Jt-AUd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -717,7 +720,7 @@
     <resources>
         <image name="back" width="11" height="20"/>
         <image name="cart.fill" catalog="system" width="128" height="102"/>
-        <image name="close_black" width="10" height="10"/>
+        <image name="close_black" width="14" height="14"/>
         <image name="new_minus" width="28" height="28"/>
         <image name="new_plus" width="28" height="28"/>
         <image name="success" width="118" height="118"/>

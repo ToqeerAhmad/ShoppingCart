@@ -10,9 +10,10 @@ import UIKit
 import MBProgressHUD
 class CartViewController: UIViewController {
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var emptyCartStackView: UIStackView!
     @IBOutlet weak var totalPriceLabel: UILabel!
-    @IBOutlet weak var totalPriceView: UIView!
+    @IBOutlet var bottomViews: [UIView]!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.estimatedRowHeight = 70.0
@@ -26,9 +27,10 @@ class CartViewController: UIViewController {
         super.viewDidLoad()
         // get products from User defaults
         cartItems = SharedUtility.poductList
+        titleLabel.text = "Cart(\(cartItems.count))"
         // hide tableview and bottom views if cart is empty
         tableView.isHidden = SharedUtility.poductList.isEmpty
-        totalPriceView.isHidden = SharedUtility.poductList.isEmpty
+        bottomViews.forEach({$0.isHidden = SharedUtility.poductList.isEmpty})
         // Do any additional setup after loading the view.
         calculateTotalPrice()
     }
@@ -46,7 +48,6 @@ class CartViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now()+2) {
             self.dismissHUD()
             let orderConfirmationVC = self.storyboard?.instantiateViewController(identifier: "OrderConfirmationVC") as! OrderConfirmationVC
-            orderConfirmationVC.products = self.cartItems
             self.navigationController?.pushViewController(orderConfirmationVC, animated: true)
         }
     }
