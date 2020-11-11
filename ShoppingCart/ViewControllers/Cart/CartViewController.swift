@@ -41,15 +41,32 @@ class CartViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
+    
+    @IBAction func backToHomeScreen(_ sender: UIButton) {
+        if let controllers = self.navigationController?.viewControllers {
+            controllers.forEach { (viewController) in
+                if viewController.isKind(of: ListViewController.self) {
+                    self.navigationController?.popToViewController(viewController, animated: true)
+                }
+            }
+        }
+    }
         
     @IBAction func checkOut(_ sender: UIButton) {
-        self.showHUD()
-        SharedUtility.poductList = []
-        DispatchQueue.main.asyncAfter(deadline: .now()+2) {
-            self.dismissHUD()
-            let orderConfirmationVC = self.storyboard?.instantiateViewController(identifier: "OrderConfirmationVC") as! OrderConfirmationVC
-            self.navigationController?.pushViewController(orderConfirmationVC, animated: true)
+        self.showAlert(title: "Checkout!", message: "Are you sure you want to checkout?", options: "Yes", "No") { [weak self] (index) in
+            guard let self = self else { return }
+            self.showHUD()
+            SharedUtility.poductList = []
+            DispatchQueue.main.asyncAfter(deadline: .now()+2) {
+                self.dismissHUD()
+                self.movetoOrderConfirmationScreen()
+            }
         }
+    }
+    
+    func movetoOrderConfirmationScreen() {
+        let orderConfirmationVC = self.storyboard?.instantiateViewController(identifier: "OrderConfirmationVC") as! OrderConfirmationVC
+        self.navigationController?.pushViewController(orderConfirmationVC, animated: true)
     }
 }
 
